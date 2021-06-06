@@ -2,13 +2,31 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
     {
-        author : String,
-        title : String,
-        post : String,
+        author: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        title : {
+            type: String,
+            required: true
+        },
+        post:{
+            type: String,
+            required: true,
+            maxlength: 200
+        },
         comments : [
             {
-                commenter: String,
-                comment : String
+                commenter:{
+                    type: String,
+                    required: true,
+                },
+                comment : {
+                    type: String,
+                    required: true,
+                    maxlength: 100
+                }
             }
         ]
 
