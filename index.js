@@ -4,7 +4,7 @@ const express = require("express");
 var cors = require('cors');
 require('./db-connection');
 const PostRouter = require('./Routers/Post');
-
+const CommentRouter = require('./Routers/Comment');
 /** App Variables **/
 const app = express();
 const port = process.env.PORT || "3000";
@@ -15,6 +15,7 @@ app.use(express.json())
 
 /** Routes Definitions **/
 app.use('/api/post', PostRouter);
+app.use('/api/comment', CommentRouter);
 
 app.use((req, res, next) => { //logger
     console.log(`Request Url : ${req.url}, Request method : ${req.method}, Date of Request: ${Date()}`);

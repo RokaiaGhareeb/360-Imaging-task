@@ -57,9 +57,15 @@ PostRouter.get('/:id', async (req, res) => {
 PostRouter.patch('/:id', async (req, res) => {
     const {author, title, post, comments} = req.body;
     try{
-        await Posts.updateOne({_id : req.params.id}, {author, title, post, comments});
-        res.statusCode = 200;
-        res.send({"message":"Post updated"});
+        const updatedPost = await Posts.find({_id : req.params.id});
+        if(updatedPost != null){
+            await Posts.updateOne({_id : req.params.id}, {author, title, post, comments});
+            res.statusCode = 200;
+            res.send({"message":"Post updated"});
+        }else{
+            res.statusCode = 404;
+            res.send({"message":"Post not found!"});
+        }
     }catch(err){
          res.statusCode = 422;
          res.send({ "message" : "Something wrong, retry again!"});
@@ -68,11 +74,16 @@ PostRouter.patch('/:id', async (req, res) => {
  
 //Delete a specific Post providing its id
 PostRouter.delete('/:id', async (req, res) => {
-    const {author, title, post, comments} = req.body;
     try{
-        await Posts.deleteOne({_id : req.params.id});
-        res.statusCode = 200;
-        res.send({"message":"Post deleted"});
+        const post = await Posts.findOne({_id : req.params.id});
+        if(post != null){
+            await Posts.deleteOne({_id : req.params.id});
+            res.statusCode = 200;
+            res.send({"message":"Post deleted"});
+        }else{
+            res.statusCode = 404;
+            res.send({"message":"Post not found!"});
+        }
     }catch(err){
          res.statusCode = 422;
          res.send({ "message" : "Something wrong, retry again!"});
