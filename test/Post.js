@@ -1,11 +1,45 @@
+const mongoose = require('mongoose');
+var Post = mongoose.models.Post;
+const server=require("../index.js");
 var assert = require("assert");
+
 let chai = require("chai");
 let chaiHttp = require("chai-http");
-let server=require("../index.js");
 let should = chai.should();
+
 chai.use(chaiHttp);
 
+
 describe ("CRUD OPERATIONS", function(){
+
+    before(() => Post.deleteMany({})); //clear test database
+
+    const ID = mongoose.Types.ObjectId();
+    const taskId = "70bd7270066eee4178e4405e";
+
+    it ("Post a new post", (done)=>{
+        const post = {author : "RokaiaGhareeb", title: "Hi There", post : "This is a new post for testing", _id: ID};
+        chai.request(server)
+        .post("/api/post/")
+        .send(post)
+        .end((err, result)=>{
+            result.should.have.status(200);
+            done();
+        });
+    });
+
+    it ("Post a new post with missing attributes", (done)=>{
+        const post = {title: "Hi There", post : "This is a new post for testing"};
+        chai.request(server)
+        .post("/api/post/")
+        .send(post)
+        .end((err, result)=>{
+            result.should.have.status(400);
+            done();
+        });
+    });
+
+
     it ("Should Fetch all the Posts", (done)=>{
             chai.request(server)
             .get("/api/post/")
@@ -17,9 +51,8 @@ describe ("CRUD OPERATIONS", function(){
     });
 
     it ("Should Fetch specific post", (done)=>{
-        const taskId = "60bd7270066eee4178e4405e";
         chai.request(server)
-        .get("/api/post/" + taskId)
+        .get("/api/post/" + ID)
         .end((err, result)=>{
             result.should.have.status(200);
             done();
@@ -27,7 +60,6 @@ describe ("CRUD OPERATIONS", function(){
     });
 
     it ("ID doesn't exist to fetch", (done)=>{
-        const taskId = "70bd7270066eee4178e4405e";
         chai.request(server)
         .get("/api/post/" + taskId)
         .end((err, result)=>{
@@ -35,10 +67,44 @@ describe ("CRUD OPERATIONS", function(){
             done();
         });
     });
+    
+    it("Update post", (done)=>{
+        const updatedPost = {title : "updated"};
+        chai.request(server)
+        .patch("/api/post/" + ID)
+        .send(updatedPost)
+        .end((err, result)=>{
+            result.should.have.status(200);
+            done();
+        });
+    });    
 
-    //post
+    it ("Delete Post", (done)=>{
+        chai.request(server)
+        .delete("/api/post/" + ID)
+        .end((err, result)=>{
+            result.should.have.status(200);
+            done();
+        });
+    });    
 
-    //delete
+    it ("Delete Post doesn't exist", (done)=>{
+        chai.request(server)
+        .delete("/api/post/" + ID)
+        .end((err, result)=>{
+            result.should.have.status(404);
+            done();
+        });
+    });    
 
-    //update
+    it("Update post doesn't exist", (done)=>{
+        const updatedPost = {title : "updated"};
+        chai.request(server)
+        .patch("/api/post/" + ID)
+        .send(updatedPost)
+        .end((err, result)=>{
+            result.should.have.status(404);
+            done();
+        });
+    });    
 });

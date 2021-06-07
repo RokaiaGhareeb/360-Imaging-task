@@ -5,7 +5,7 @@ const schema = new mongoose.Schema(
         author: {
             type: String,
             required: true,
-            unique: true
+            
         },
         title : {
             type: String,
@@ -41,4 +41,4 @@ const schema = new mongoose.Schema(
 
 const Post = mongoose.model('Post', schema);
 
-module.exports  =  Post;
+module.exports = Post;
