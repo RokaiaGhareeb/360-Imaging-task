@@ -18,6 +18,12 @@ const schema = new mongoose.Schema(
         },
         comments : [
             {
+                _id : {
+                    type: mongoose.Schema.Types.ObjectId,
+                    index: true,
+                    required: true,
+                    auto: true,
+                },
                 commenter:{
                     type: String,
                     required: true,
