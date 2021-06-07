@@ -1,11 +1,11 @@
 {
-  "name": "java_code_challenge",
+  "name": "imaging_backend_task",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --inspect index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --timeout 15000"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +16,10 @@
     "inspector": "^0.5.0",
     "mongoose": "^5.12.12",
     "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.4.0",
+    "chai-http": "^4.3.0"
   }
 }

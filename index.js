@@ -31,6 +31,8 @@ app.use( (req, res, next) =>  { //error handler
 
 /** Server Activation **/
 
-app.listen(port, () => {
+var server = app.listen(port, () => {
     console.log(`Listening to requests on http://localhost:${port}`);
 });
+
+module.exports = server;
