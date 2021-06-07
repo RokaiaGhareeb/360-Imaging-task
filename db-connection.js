@@ -3,7 +3,18 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-mongoose.connect(`mongodb+srv://rokaia-admin:${process.env.password}@cluster0.i8bmm.mongodb.net/360Blog?retryWrites=true&w=majority`, { useFindAndModify: false }, (err)=>{
+
+let dbURI;
+
+if (process.env.NODE_ENV ==='test'){
+  console.log(process.env.NODE_ENV);
+  dbURI = process.env.DBTest
+}
+if (process.env.NODE_ENV ==='production'){
+  dbURI = process.env.DBHost
+}
+
+mongoose.connect(dbURI , { useFindAndModify: false }, (err)=>{
     if(err){
       console.error(err);
       process.exit(1);
