@@ -12,14 +12,19 @@ module.exports = PostRouter;
 
 //Post new post
 PostRouter.post('/', async (req, res) => {
-    const {author, title, post} = req.body;
+    const {author, title, post, _id} = req.body;
     try {
-        const newPost = await Posts.create({author, title, post, comments : []});
-        //console.log(newPost);
+        let newPost;
+        if(process.env.NODE_ENV ==='test'){
+            newPost = await Posts.create({author, title, post, comments : [], _id});
+        }else{
+            newPost = await Posts.create({author, title, post, comments : []});
+        }
+        console.log(newPost);
         res.statusCode = 200;
         res.send({"message" : "Posted successfully"});
     } catch (err) {
-        res.statusCode = 422;
+        res.statusCode = 400;
         res.send({ "message" : "Something wrong, retry again!"});
     }
 });
@@ -55,11 +60,11 @@ PostRouter.get('/:id', async (req, res) => {
  
 //Update a specific post providing its id
 PostRouter.patch('/:id', async (req, res) => {
-    const {author, title, post, comments} = req.body;
+    let {title, post} = req.body;
     try{
-        const updatedPost = await Posts.find({_id : req.params.id});
+        const updatedPost = await Posts.findOne({_id : req.params.id});
         if(updatedPost != null){
-            await Posts.updateOne({_id : req.params.id}, {author, title, post, comments});
+            await Posts.updateOne({_id : req.params.id}, {title : title ?? updatedPost.title, post : post ?? updatedPost.post});
             res.statusCode = 200;
             res.send({"message":"Post updated"});
         }else{
