@@ -2,7 +2,7 @@ const express = require('express');
 
 const mongoose = require('mongoose');
 
-const Posts = require('../models/Posts');
+const Posts = require('../Models/Posts');
 
 const CommentRouter = express.Router();
 
