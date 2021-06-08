@@ -2,10 +2,10 @@
   "name": "imaging_backend_task",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "dev": "SET NODE_ENV=production&& nodemon index.js",
+    "start": "node app.js",
+    "dev": "SET NODE_ENV=production&& nodemon app.js",
     "test": "SET NODE_ENV=test&& mocha --timeout 15000"
   },
   "author": "",

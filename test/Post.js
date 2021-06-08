@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 var Posts = require('../Routers/Post');
-const server=require("../index");
+const server=require("../app");
 var assert = require("assert");
 
 let chai = require("chai");
