@@ -1,4 +1,5 @@
 /** Required External Modules **/
+require('dotenv').config();
 var inspector = require('inspector');
 const express = require("express");
 var cors = require('cors');
