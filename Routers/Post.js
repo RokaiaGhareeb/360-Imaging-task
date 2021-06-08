@@ -2,7 +2,7 @@ const express = require('express');
 
 const mongoose = require('mongoose');
 
-const Posts = require('../models/Posts.js');
+const Posts = require('../models/Posts');
 
 const PostRouter = express.Router();
 

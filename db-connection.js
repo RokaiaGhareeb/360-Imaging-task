@@ -7,12 +7,13 @@ require('dotenv').config();
 let dbURI;
 
 if (process.env.NODE_ENV ==='test'){
-  console.log(process.env.NODE_ENV);
   dbURI = process.env.DBTest
 }
 if (process.env.NODE_ENV ==='production'){
   dbURI = process.env.DBHost
 }
+
+console.log(process.env.NODE_ENV);
 
 mongoose.connect(dbURI , { useFindAndModify: false }, (err)=>{
     if(err){
