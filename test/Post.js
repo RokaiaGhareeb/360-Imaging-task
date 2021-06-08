@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var Post = mongoose.models.Post;
+var Posts = require('../Routers/Post.js');
 const server=require("../index.js");
 var assert = require("assert");
 
@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 
 describe ("Post CRUD OPERATIONS", function(){
 
-    before(() => Post.deleteMany({})); //clear test database
+    before(() => Posts.Post.deleteMany({})); //clear test database
 
     const ID = mongoose.Types.ObjectId();
     const taskId = "70bd7270066eee4178e4405e";

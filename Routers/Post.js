@@ -7,7 +7,8 @@ const Posts = require('../models/Posts.js');
 const PostRouter = express.Router();
 
 
-module.exports = PostRouter;
+exports.Router = PostRouter;
+exports.Post = Posts;
 
 
 //Post new post
