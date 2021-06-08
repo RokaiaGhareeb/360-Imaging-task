@@ -10,7 +10,7 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 
-describe ("CRUD OPERATIONS", function(){
+describe ("Post CRUD OPERATIONS", function(){
 
     before(() => Post.deleteMany({})); //clear test database
 

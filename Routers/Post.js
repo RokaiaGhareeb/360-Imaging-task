@@ -20,7 +20,6 @@ PostRouter.post('/', async (req, res) => {
         }else{
             newPost = await Posts.create({author, title, post, comments : []});
         }
-        console.log(newPost);
         res.statusCode = 200;
         res.send({"message" : "Posted successfully"});
     } catch (err) {
