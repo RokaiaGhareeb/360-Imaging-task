@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const server=require("../index.js");
+const server=require("../index");
 var assert = require("assert");
 
 let chai = require("chai");
