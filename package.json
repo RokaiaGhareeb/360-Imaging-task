@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production nodemon ./index.js",
+    "start": "nodemon ./index.js",
     "dev": "SET NODE_ENV=production&& nodemon index.js",
     "test": "SET NODE_ENV=test&& mocha --timeout 15000"
   },
@@ -14,7 +14,6 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "inspector": "^0.5.0",
     "mongoose": "^5.12.12",
     "nodemon": "^2.0.7"
   },
